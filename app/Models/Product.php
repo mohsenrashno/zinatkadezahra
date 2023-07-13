@@ -6,20 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
 
-class User extends Model
+class Product extends Model
 {
     use HasFactory;
 	
 	protected $fillable = [
-		'phonenumber',
-	    'password',
 		'name',
-		'address',
-		'role' 
+		'type',
+		'size',
+		'price'
 	];
 	
-	public function orders ()
+	public function orders()
 	{
-		return $this->hasMany(Order::class);
+		return $this->belongsToMany(Order::class);
 	}
 }
