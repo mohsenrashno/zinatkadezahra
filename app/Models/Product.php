@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
+use App\Models\Picture;
 
 class Product extends Model
 {
@@ -16,6 +17,11 @@ class Product extends Model
 		'size',
 		'price'
 	];
+
+	public function pictures()
+	{
+		return $this->hasMany(Picture::class);
+	}
 	
 	public function orders()
 	{

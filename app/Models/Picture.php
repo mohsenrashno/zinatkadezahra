@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class Picture extends Model
 {
@@ -14,4 +15,9 @@ class Picture extends Model
 		'path'
 	
 	];
+
+	public function product()
+	{
+		return $this->belongsTo(Product::class);
+	}
 }
