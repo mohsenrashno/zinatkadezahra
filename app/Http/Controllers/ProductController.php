@@ -14,11 +14,12 @@ class ProductController extends Controller
 
         $temp = Product::where('name', $productname)->first()->id;
         $picturename = Product::find($temp)->pictures()->first();
+        $price = Product::find($temp)->price;
 
 
         if($picturename!=null)
             $picturename = $picturename->path;
 
-            return view('product',['productname' => $productname, 'picturename' => $picturename]);
+            return view('product',['productname' => $productname, 'picturename' => $picturename, 'price' => $price]);
     }
 }
