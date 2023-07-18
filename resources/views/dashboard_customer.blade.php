@@ -62,7 +62,7 @@
 		<td class="column8">{{ $order->delivarydate }}</td>
 		<td class="column9"> {{$all_products }}</td>
 		<td class="column10">{{ $order->price }}</td>
-		<td class="column11"><button  style="--c:#E95A49"><a href="tebyan.net">پرداخت</a></button></td>
+		<td class="column11"><button  style="--c:#E95A49"><a href="{{route('payment', ['id'=> $order])}}">پرداخت</a></button></td>
 		
 	</tr>
 	@endforeach
