@@ -15,6 +15,9 @@
 	<title> زینتکده زهرا </title>
 	<link type="text/css" href="{{asset('css/style_table.css')}}" rel="stylesheet" />
 	<link rel="stylesheet" href="{{asset('css/style_button.css')}}">
+
+	
+		<link rel="stylesheet" href="{{asset('css/font_dashboard-awesome.min.css')}}">
 </head>
 
 <body>	
