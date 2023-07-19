@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-@if (Route::has('login'))
+			{{-- @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
@@ -24,7 +24,7 @@
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif --}}
 	<div class="row">
 		<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-push-2 col-md-push-1">
 			<!-- start product box -->
@@ -43,20 +43,28 @@
 							<!-- start right side -->
 							<div class="right">
 								<h1>{{ $productname }}</h1>
-								<h2>صندلی راحتی</h2>
+								<h2>{{ $producttype }} </h2>
 								<h3><input disabled name="product-price" id="product-price" value="{{ $price }}">  تومان</h3>
-								<img src="{{asset('pics/chair.png')}}" alt="" />
+								<img src="{{asset('pics/'.$productname.'.jpg')}}" alt="" />
 							</div>
 							<!-- end right side -->
 						</div>
 						<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 							<!-- start left side -->
 							<div class="left">
-								<p>چند نکته در مورد این محصول رو میگم که امیدوارم به دوستان در انتخاب صندلی برای منزل یا هرجای دیگه کمک کرده باهشم.
-									1. چرم مصنوعی باکیفیت و قابل شستشو ( منظورم از شستسشو این هست که خیلی راحت میتونید با رایت یا شوینده های دیگه لکه ها و هرچیز دیگه رو از روی این محصول پاک کنید.
-									2. پایه چوبی رنگ شده که باز هم باعت میشه راحت بتونید پایه ها رو تمیز کنید و در اثر رطوبت به چوب آسیبی وارد نشه.
+								<p>
+								@php
+								$filename = './description/'.$productname.'.txt';
+								$f = fopen($filename, 'r');
+
+								if ($f) {
+    							$contents = fread($f, filesize($filename));
+    							fclose($f);
+    							echo nl2br($contents);
+								}
+								@endphp
 								</p>
-								<p><a href="">دارای گارانتی</a></p>
+								
 								<p>
 									<span class="fa fa-star yellow"></span>
 									<span class="fa fa-star yellow"></span>

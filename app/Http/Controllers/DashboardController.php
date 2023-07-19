@@ -49,7 +49,9 @@ class DashboardController extends Controller
         // $r = DB::update('update orders set paiddate = 100 where id = ?', array($request->id));
        //$r = DB::insert('insert into orders (id, paiddate) values (?, ?)', array($request->id, '1402-02-30'));
        $current_date = date("Y-m-d")." ". date("h:i:s");
-       $r = DB::table('orders')->where('id', $request->id)->update(array('paiddate' => $current_date));
+       $r = DB::table('orders')->where('id', $request->id)->update(array('paiddate' => $current_date, 'paidstatus' =>4));
+    //    $r = DB::table('orders')->where('id', $request->id)->update(array());
+       
         return redirect()->back();
 
     }

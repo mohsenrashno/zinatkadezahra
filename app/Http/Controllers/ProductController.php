@@ -15,11 +15,12 @@ class ProductController extends Controller
         $temp = Product::where('name', $productname)->first()->id;
         $picturename = Product::find($temp)->pictures()->first();
         $price = Product::find($temp)->price;
+        $producttype = Product::find($temp)->type;
 
 
         if($picturename!=null)
             $picturename = $picturename->path;
 
-            return view('product',['productname' => $productname, 'picturename' => $picturename, 'price' => $price]);
+            return view('product',['productname' => $productname, 'picturename' => $picturename, 'price' => $price, 'producttype' => $producttype]);
     }
 }
