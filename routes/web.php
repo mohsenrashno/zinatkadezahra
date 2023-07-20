@@ -16,13 +16,9 @@ use App\Models\Product;
 
 Route::get('/', [DashboardController::class, 'role'])->name('dashboard');
 
-Route::get('/dashboard_admin', function () {
-    return view('dashboard_admin');
-})->middleware(['auth', 'verified'])->name('admin');
+Route::get('/dashboard_admin', [DashboardController::class, 'admin'])->middleware(['auth', 'verified'])->name('admin');
 
-Route::get('/dashboard_tailor', function () {
-    return view('dashboard_tailor');
-})->middleware(['auth', 'verified'])->name('tailor');
+Route::get('/dashboard_tailor', [DashboardController::class, 'tailor'])->middleware(['auth', 'verified'])->name('tailor');
 
 Route::get('/dashboard_customer', [DashboardController::class, 'customer'])->middleware(['auth', 'verified'])->name('customer');
 
@@ -35,5 +31,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/product/{name}', [ProductController::class, 'show'])->name('product');
 Route::get('/order/{id}', [OrderController::class, 'register'])->name('order');
-Route::get('payment/{id}',[DashboardController::class, 'payment'])->name('payment');
-require __DIR__.'/auth.php';
+Route::get('payment/{id}', [DashboardController::class, 'payment'])->name('payment');
+Route::get('preparing/{id}', [DashboardController::class, 'preparing'])->name('preparing');
+Route::get('finished/{id}', [DashboardController::class, 'finished'])->name('finished');
+Route::get('delivery/{id}', [DashboardController::class, 'delivery'])->name('delivery');
+
+require __DIR__ . '/auth.php';

@@ -30,7 +30,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                             <div class="list-group">
                                 <a href="#" class="list-group-item active text-center">
-                                    <h4 class="fa fa-plane"></h4><br />پرواز
+                                    <h4 class="fa fa-plane"></h4><br />سفارشات
                                 </a>
                                 <a href="#" class="list-group-item text-center">
                                     <h4 class="fa fa-road"></h4><br />قطار
@@ -38,12 +38,7 @@
                                 <a href="#" class="list-group-item text-center">
                                     <h4 class="fa fa-home"></h4><br />هتل
                                 </a>
-                                <a href="#" class="list-group-item text-center">
-                                    <h4 class="fa fa-cutlery"></h4><br />رستوران
-                                </a>
-                                <a href="#" class="list-group-item text-center">
-                                    <h4 class="fa fa-credit-card"></h4><br />کارت اعتباری
-                                </a>
+                           
                             </div>
                         </div>
                         <!-- end tab list -->
@@ -69,7 +64,6 @@
                                                                 <th class="column8">تاریخ تحویل</th>
                                                                 <th class="column9">کالاها </th>
                                                                 <th class="column10">جمع کل</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -92,7 +86,7 @@
                                                                     <td class="column5">{{ $order->paiddate }}</td>
                                                                     <td class="column6">{{ $order->preparingdate }}</td>
                                                                     <td class="column7">{{ $order->finisheddate }}</td>
-                                                                    <td class="column8">{{ $order->delivarydate }}</td>
+                                                                    <td class="column8">{{ $order->deliverydate }}</td>
                                                                     <td class="column9"> {{ $all_products }}</td>
                                                                     <td class="column10">{{ $order->price }}</td>
                                                                     <td class="column11"><button style="--c:#E95A49"><a

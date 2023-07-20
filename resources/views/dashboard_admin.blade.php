@@ -11,12 +11,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title> زینتکده زهرا </title>
+        <title> زینتکده زهرا </title>
         <!-- start styles and css -->
         <link rel="stylesheet" href="{{ asset('css/bootstrap_dashboard-rtl.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font_dashboard-awesome.min.css') }}">
         <link type="text/css" href="{{ asset('css/style_table.css') }}" rel="stylesheet" />
-		<link type="text/css" href="{{ asset('css/style_button.css') }}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('css/style_button.css') }}" rel="stylesheet" />
         <!-- end styles and css -->
     </head>
 
@@ -57,39 +57,72 @@
                                                 <table>
                                                     <thead>
                                                         <tr class="table100-head">
-                                                            <th class="column1">تاریخ</th>
-                                                            <th class="column2">شماره سفارش</th>
-                                                            <th class="column3">نام</th>
-                                                            <th class="column4">قیمت</th>
-                                                            <th class="column5">تعداد</th>
-                                                            <th class="column6">جمع کل</th>
+                                                            <th class="column1">شماره سفارش</th>
+                                                            <th class="column12">نام مشتری </th>
+                                                            <th class="column2"> تاریخ سفارش</th>
+                                                            <th class="column3">تاریخ لغو</th>
+                                                            <th class="column4">وضعیت پرداخت</th>
+                                                            <th class="column5">تاریخ پرداخت</th>
+                                                            <th class="column6"> تاریخ آماده سازی</th>
+                                                            <th class="column7"> تاریخ اتمام</th>
+                                                            <th class="column8">تاریخ تحویل</th>
+                                                            <th class="column9">کالاها </th>
+                                                            <th class="column10">جمع کل</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td class="column1">1398-09-29 01:22</td>
-                                                            <td class="column2">200398</td>
-                                                            <td class="column3">گوشی موبایل iPhone X 64Gb Grey</td>
-                                                            <td class="column4">999 هزار تومان</td>
-                                                            <td class="column5">1</td>
-                                                            <td class="column6">999 هزار تومان</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="column1">1398-09-28 05:57</td>
-                                                            <td class="column2">200397</td>
-                                                            <td class="column3">گوشی موبایل Samsung S8 Black</td>
-                                                            <td class="column4">756 هزار تومان</td>
-                                                            <td class="column5">1</td>
-                                                            <td class="column6">756 هزار تومان</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="column1">1398-09-26 05:57</td>
-                                                            <td class="column2">200396</td>
-                                                            <td class="column3">دسته حرفه ای کامپیوتر</td>
-                                                            <td class="column4">22 هزار تومان</td>
-                                                            <td class="column5">2</td>
-                                                            <td class="column6">44 هزار تومان</td>
-                                                        </tr>
+
+                                                        @foreach ($orders as $order)
+                                                            @php
+                                                                $p = App\Http\Controllers\DashboardController::products($order->id);
+                                                                $all_products = null;
+                                                                foreach ($p as $temp) {
+                                                                    $all_products .= $temp->name;
+                                                                    $all_products .= ', ';
+                                                                }
+                                                            @endphp
+                                                            <tr>
+                                                                <td class="column1">{{ $order->id }}</td>
+                                                                <td class="column12">
+                                                                    {{ App\Models\Order::find($order->id)->user()->first()->name }}
+                                                                </td>
+                                                                <td class="column2">{{ $order->orderdate }}</td>
+                                                                <td class="column3">{{ $order->ordercanceleddate }}
+                                                                </td>
+                                                                <td class="column4">{{ $order->paidstatus }}</td>
+                                                                <td class="column5">{{ $order->paiddate }}</td>
+                                                                <td class="column6">
+                                                                    @if ($order->preparingdate == null)
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('preparing', ['id' => $order]) }}">ثبت</a></button>
+                                                                    @else
+                                                                        {{ $order->preparingdate }}
+                                                                    @endif
+
+                                                                </td>
+                                                                <td class="column7">
+                                                                    @if ($order->finisheddate == null)
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('finished', ['id' => $order]) }}">ثبت</a></button>
+                                                                    @else
+                                                                        {{ $order->finisheddate }}
+                                                                    @endif
+                                                                </td>
+                                                                <td class="column8">
+                                                                
+                                                                    @if ($order->deliverydate == null)
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('delivery', ['id' => $order]) }}">ثبت</a></button>
+                                                                    @else
+                                                                    {{ $order->deliverydate }}
+                                                                    @endif
+                                                                </td>
+                                                                <td class="column9"> {{ $all_products }}</td>
+                                                                <td class="column10">{{ $order->price }}</td>
+
+                                                            </tr>
+                                                        @endforeach
+
                                                     </tbody>
                                                 </table>
                                             </div>
