@@ -35,5 +35,6 @@ Route::get('payment/{id}', [DashboardController::class, 'payment'])->name('payme
 Route::get('preparing/{id}', [DashboardController::class, 'preparing'])->name('preparing');
 Route::get('finished/{id}', [DashboardController::class, 'finished'])->name('finished');
 Route::get('delivery/{id}', [DashboardController::class, 'delivery'])->name('delivery');
+Route::get('cart/{id}', [DashboardController::class, 'cart'])->name('cart');
 
 require __DIR__ . '/auth.php';

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function role()
+    static public function role()
     {
         $role = 0;
         $user = auth()->user();
@@ -70,7 +70,7 @@ class DashboardController extends Controller
         $r = DB::table('orders')->where('id', $request->id)->update(array('paiddate' => $current_date, 'paidstatus' => 4));
         //    $r = DB::table('orders')->where('id', $request->id)->update(array());
 
-        return redirect()->back();
+        return DashboardController::role(); 
     }
 
     public function preparing(Request $request)
@@ -109,5 +109,22 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
-    
+    public function cart(Request $request)
+    {
+        $order_id = $request->id;
+
+
+        $user_id = auth()->user()->id;
+        $order = Order::find($order_id);
+        $products = Order::find($order_id)->products()->get();
+        $address = User::find($user_id)->address;
+
+        return view('cart', [
+            'order' => $order,
+            'products' => $products,
+            'address' => $address
+        ]);
+    }
+
+
 }

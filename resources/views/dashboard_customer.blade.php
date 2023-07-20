@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap_dashboard-rtl.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font_dashboard-awesome.min.css') }}">
         <link type="text/css" href="{{ asset('css/style_table.css') }}" rel="stylesheet" />
-		<link type="text/css" href="{{ asset('css/style_button.css') }}" rel="stylesheet" />
+        <link type="text/css" href="{{ asset('css/style_button.css') }}" rel="stylesheet" />
         <!-- end styles and css -->
     </head>
 
@@ -38,7 +38,7 @@
                                 <a href="#" class="list-group-item text-center">
                                     <h4 class="fa fa-home"></h4><br />هتل
                                 </a>
-                           
+
                             </div>
                         </div>
                         <!-- end tab list -->
@@ -77,23 +77,56 @@
                                                                         $all_products .= ', ';
                                                                     }
                                                                 @endphp
-                                                                <tr>
-                                                                    <td class="column1">{{ $order->id }}</td>
-                                                                    <td class="column2">{{ $order->orderdate }}</td>
-                                                                    <td class="column3">{{ $order->ordercanceleddate }}
-                                                                    </td>
-                                                                    <td class="column4">{{ $order->paidstatus }}</td>
-                                                                    <td class="column5">{{ $order->paiddate }}</td>
-                                                                    <td class="column6">{{ $order->preparingdate }}</td>
-                                                                    <td class="column7">{{ $order->finisheddate }}</td>
-                                                                    <td class="column8">{{ $order->deliverydate }}</td>
-                                                                    <td class="column9"> {{ $all_products }}</td>
-                                                                    <td class="column10">{{ $order->price }}</td>
-                                                                    <td class="column11"><button style="--c:#E95A49"><a
-                                                                                href="{{ route('payment', ['id' => $order]) }}">پرداخت</a></button>
-                                                                    </td>
-
-                                                                </tr>
+                                                                @if ($order->paidstatus == null)
+                                                                    <tr
+                                                                        onclick="window.location='{{ route('cart', ['id' => $order]) }}'">
+                                                                        <td class="column1">{{ $order->id }}</td>
+                                                                        <td class="column2">{{ $order->orderdate }}</td>
+                                                                        <td class="column3">
+                                                                            {{ $order->ordercanceleddate }}
+                                                                        </td>
+                                                                        <td class="column4">{{ $order->paidstatus }}
+                                                                        </td>
+                                                                        <td class="column5">{{ $order->paiddate }}</td>
+                                                                        <td class="column6">{{ $order->preparingdate }}
+                                                                        </td>
+                                                                        <td class="column7">{{ $order->finisheddate }}
+                                                                        </td>
+                                                                        <td class="column8">{{ $order->deliverydate }}
+                                                                        </td>
+                                                                        <td class="column9"> {{ $all_products }}</td>
+                                                                        <td class="column10">{{ $order->price }}</td>
+                                                                        <td class="column11"><button
+                                                                                style="--c:#E95A49"><a
+                                                                                    href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                @else
+                                                                    <tr style="cursor:default; background-color:yellow"
+                                                                        onclick="paymentAlert()">
+                                                                        <td class="column1">{{ $order->id }}</td>
+                                                                        <td class="column2">{{ $order->orderdate }}
+                                                                        </td>
+                                                                        <td class="column3">
+                                                                            {{ $order->ordercanceleddate }}
+                                                                        </td>
+                                                                        <td class="column4">{{ $order->paidstatus }}
+                                                                        </td>
+                                                                        <td class="column5">{{ $order->paiddate }}</td>
+                                                                        <td class="column6">{{ $order->preparingdate }}
+                                                                        </td>
+                                                                        <td class="column7">{{ $order->finisheddate }}
+                                                                        </td>
+                                                                        <td class="column8">{{ $order->deliverydate }}
+                                                                        </td>
+                                                                        <td class="column9"> {{ $all_products }}</td>
+                                                                        <td class="column10">{{ $order->price }}</td>
+                                                                        <td class="column11"><button
+                                                                                style="--c:#E95A49"><a
+                                                                                    href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -141,6 +174,11 @@
                 </div>
             </div>
             <!-- start javascript -->
+            <script>
+                function paymentAlert() {
+                    alert("پرداخت شده است!");
+                }
+            </script>
             <script src="{{ asset('js/jquery_dashboard-3.1.1.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap_dashboard.min.js') }}"></script>
             <script src="{{ asset('js/scripts_dashboard.js') }}"></script>
