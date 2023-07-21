@@ -28,20 +28,21 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                         <div class="list-group">
                             <a href="#" class="list-group-item active text-center">
-                                <h4 class="fa fa-plane"></h4><br />پرواز
+                                <h4 class="fa fa-plane"></h4><br />سفارشات
                             </a>
                             <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-road"></h4><br />قطار
+                                <h4 class="fa fa-road"></h4><br />مشتری
                             </a>
                             <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-home"></h4><br />هتل
+                                <h4 class="fa fa-home"></h4><br />خیاط
                             </a>
                             <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-cutlery"></h4><br />رستوران
+                                <h4 class="fa fa-credit-card"></h4><br />ارجاع کارها
                             </a>
                             <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-credit-card"></h4><br />کارت اعتباری
+                                <h4 class="fa fa-cutlery"></h4><br /> ثبت نام خیاط
                             </a>
+
                         </div>
                     </div>
                     <!-- end tab list -->
@@ -109,12 +110,12 @@
                                                                     @endif
                                                                 </td>
                                                                 <td class="column8">
-                                                                
+
                                                                     @if ($order->deliverydate == null)
                                                                         <button style="--c:#E95A49"><a
                                                                                 href="{{ route('delivery', ['id' => $order]) }}">ثبت</a></button>
                                                                     @else
-                                                                    {{ $order->deliverydate }}
+                                                                        {{ $order->deliverydate }}
                                                                     @endif
                                                                 </td>
                                                                 <td class="column9"> {{ $all_products }}</td>
@@ -129,24 +130,116 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </center>
                         </div>
                         <!-- train section -->
                         <div class="bhoechie-tab-content">
                             <center>
-                                <h1 class="fa fa-road"></h1>
-                                <h2>به زودی افتتاح خواهد شد</h2>
-                                <h3>رزرو قطار</h3>
+                                <div class="limiter">
+                                    <div class="container-table100">
+                                        <div class="wrap-table100">
+                                            <div class="table100">
+                                                <table>
+                                                    <thead>
+                                                        <tr class="table100-head">
+                                                            <th class="column1">نام مشتری</th>
+                                                            <th class="column2"> تعداد سفارشات </th>
+                                                            <th class="column3"> تعداد کالاهای سفارش داده شده </th>
+                                                            <th class="column4"> مجموع قیمت سفارشات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        @foreach ($customers as $customer)
+                                                            @php
+                                                                $temp_orders = App\Models\User::find($customer->id)
+                                                                    ->orders()
+                                                                    ->get();
+                                                                $orders_count = 0;
+                                                                $products_count = 0;
+                                                                $orders_price = 0;
+                                                                foreach ($temp_orders as $temp_order) {
+                                                                    $temp_products = App\Models\Order::find($temp_order->id)
+                                                                        ->products()
+                                                                        ->get();
+                                                                    foreach ($temp_products as $temp_product) {
+                                                                        $products_count = $products_count + 1;
+                                                                    }
+                                                                    $orders_count = $orders_count + 1;
+                                                                    $temp_price = App\Models\Order::find($temp_order->id)->price;
+                                                                    $orders_price = $orders_price + $temp_price;
+                                                                }
+                                                            @endphp
+                                                            <tr>
+                                                                <td class="column1">{{ $customer->name }}</td>
+                                                                <td class="column2">
+                                                                    {{ $orders_count }}
+                                                                </td>
+                                                                <td class="column3">{{ $products_count }}</td>
+                                                                <td class="column4">{{ $orders_price }}
+                                                                </td>
+
+
+
+                                                            </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </center>
                         </div>
 
                         <!-- hotel search -->
                         <div class="bhoechie-tab-content">
                             <center>
-                                <h1 class="fa fa-home"></h1>
-                                <h2>به زودی افتتاح خواهد شد</h2>
-                                <h3>رزرو هتل</h3>
+                                <div class="limiter">
+                                    <div class="container-table100">
+                                        <div class="wrap-table100">
+                                            <div class="table100">
+                                                <table>
+                                                    <thead>
+                                                        <tr class="table100-head">
+                                                            <th class="column1">نام خیاط</th>
+                                                            <th class="column2"> تعداد کارهای شده </th>
+                                                            <th class="column3"> مجموع قیمت سفارشات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        @foreach ($tailors as $tailor)
+                                                            @php
+                                                                $temp_tailor = DB::table('order_product')
+                                                                    ->where('user_id', $tailor->id)
+                                                                    ->get();
+                                                                
+                                                                $work_count = 0;
+                                                                $works_price = 0;
+                                                                foreach ($temp_tailor as $temp_product) {
+                                                                    $temp_price = App\Models\Product::find($temp_product->product_id)->price;
+                                                                    $work_count = $work_count + 1;
+                                                                    $works_price = $works_price + $temp_price;
+                                                                }
+                                                            @endphp
+                                                            <tr>
+                                                                <td class="column1">{{ $tailor->name }}</td>
+                                                                <td class="column2">
+                                                                    {{ $work_count }}
+                                                                </td>
+                                                                <td class="column3">{{ $works_price*2/3 }}</td>
+
+                                                            </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </center>
                         </div>
                         <div class="bhoechie-tab-content">

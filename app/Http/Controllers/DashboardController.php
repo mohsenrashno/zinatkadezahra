@@ -70,7 +70,7 @@ class DashboardController extends Controller
         $r = DB::table('orders')->where('id', $request->id)->update(array('paiddate' => $current_date, 'paidstatus' => 4));
         //    $r = DB::table('orders')->where('id', $request->id)->update(array());
 
-        return DashboardController::role(); 
+        return DashboardController::role();
     }
 
     public function preparing(Request $request)
@@ -118,6 +118,8 @@ class DashboardController extends Controller
         $order = Order::find($order_id);
         $products = Order::find($order_id)->products()->get();
         $address = User::find($user_id)->address;
+
+       // return dd($address);
 
         return view('cart', [
             'order' => $order,

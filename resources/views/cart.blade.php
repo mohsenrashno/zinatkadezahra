@@ -229,19 +229,23 @@
                                             <br>
                                             <li>
                                                 درگاه اینترنتی <input type="radio"
-                                                    aria-label="Radio button for following text input" name="payment">
+                                                    aria-label="Radio button for following text input" name="payment"
+                                                    id="payment1">
                                             </li>
                                             <li>
                                                 کارت <input type="radio"
-                                                    aria-label="Radio button for following text input" name="payment">
+                                                    aria-label="Radio button for following text input" name="payment"
+                                                    id="payment2">
                                             </li>
                                             <li class="active">
                                                 بانک <input type="radio"
-                                                    aria-label="Radio button for following text input" name="payment">
+                                                    aria-label="Radio button for following text input" name="payment"
+                                                    id="payment3">
                                             </li>
                                             <li>
                                                 نقدی <input type="radio"
-                                                    aria-label="Radio button for following text input" name="payment">
+                                                    aria-label="Radio button for following text input" name="payment"
+                                                    id="payment4">
                                             </li>
 
 
@@ -257,7 +261,7 @@
                                             <option value="4">پاکستان</option>
                                         </select>
                                         <input class="post_code" type="text" id="address_field"
-                                            placeholder="آدرس" />
+                                            placeholder="آدرس" value={{$address}} />
                                         <input class="post_code" type="text" placeholder="کدپستی" />
                                         <a class="btn_1" href="{{ route('payment', ['id' => $order]) }}"
                                             onclick="verifyData()"> پرداخت</a>
@@ -339,11 +343,17 @@
     <!-- jquery plugins here-->
     <script>
         function verifyData() {
-            var empt = document.getElementById("address_field");
-            if (empt.value == "") {
+            var empt1 = document.getElementById('address_field');
+            var empt2 = document.getElementById('payment1');
+            var empt3 = document.getElementById('payment2');
+            var empt4 = document.getElementById('payment3');
+            var empt5 = document.getElementById('payment4');
+            if ((empt1.value == "") || (!empt2.checked && !empt3.checked && !empt4.checked && !empt5.checked)) {
                 alert("فیلد آدرس و نحوه پرداخت الزامی است!");
+                event.preventDefault();
+            } else {
+                alert("پرداخت با موفقیت انجام شد.!");
             }
-
         }
     </script>
 
