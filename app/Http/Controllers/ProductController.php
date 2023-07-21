@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -18,9 +20,20 @@ class ProductController extends Controller
         $producttype = Product::find($temp)->type;
 
 
-        if($picturename!=null)
+        if ($picturename != null)
             $picturename = $picturename->path;
 
-            return view('product',['productname' => $productname, 'picturename' => $picturename, 'price' => $price, 'producttype' => $producttype]);
+        return view('product', ['productname' => $productname, 'picturename' => $picturename, 'price' => $price, 'producttype' => $producttype]);
+    }
+
+    public function product_register(Request $request)
+    {
+
+
+
+        DB::table('products')->insert(
+            ['name' => $request->name, 'type' => $request->type, 'size' => $request->size, 'price' => $request->price]
+        );
+        return redirect()->back();
     }
 }

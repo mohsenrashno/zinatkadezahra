@@ -21,7 +21,6 @@
     </head>
 
     <body>
-
         <body>
             <div class="container">
                 <div class="row">
@@ -32,12 +31,7 @@
                                 <a href="#" class="list-group-item active text-center">
                                     <h4 class="fa fa-plane"></h4><br />سفارشات
                                 </a>
-                                <a href="#" class="list-group-item text-center">
-                                    <h4 class="fa fa-road"></h4><br />قطار
-                                </a>
-                                <a href="#" class="list-group-item text-center">
-                                    <h4 class="fa fa-home"></h4><br />هتل
-                                </a>
+                               
 
                             </div>
                         </div>
@@ -96,10 +90,10 @@
                                                                         </td>
                                                                         <td class="column9"> {{ $all_products }}</td>
                                                                         <td class="column10">{{ $order->price }}</td>
-                                                                        <td class="column11"><button
+                                                                        {{-- <td class="column11"><button
                                                                                 style="--c:#E95A49"><a
                                                                                     href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
-                                                                        </td>
+                                                                        </td> --}}
                                                                     </tr>
                                                                 @else
                                                                     <tr style="cursor:default; background-color:yellow"
@@ -121,10 +115,10 @@
                                                                         </td>
                                                                         <td class="column9"> {{ $all_products }}</td>
                                                                         <td class="column10">{{ $order->price }}</td>
-                                                                        <td class="column11"><button
+                                                                        {{-- <td class="column11"><button
                                                                                 style="--c:#E95A49"><a
                                                                                     href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
-                                                                        </td>
+                                                                        </td> --}}
                                                                     </tr>
                                                                 @endif
                                                             @endforeach
@@ -137,37 +131,7 @@
 
                                 </center>
                             </div>
-                            <!-- train section -->
-                            <div class="bhoechie-tab-content">
-                                <center>
-                                    <h1 class="fa fa-road"></h1>
-                                    <h2>به زودی افتتاح خواهد شد</h2>
-                                    <h3>رزرو قطار</h3>
-                                </center>
-                            </div>
-
-                            <!-- hotel search -->
-                            <div class="bhoechie-tab-content">
-                                <center>
-                                    <h1 class="fa fa-home"></h1>
-                                    <h2>به زودی افتتاح خواهد شد</h2>
-                                    <h3>رزرو هتل</h3>
-                                </center>
-                            </div>
-                            <div class="bhoechie-tab-content">
-                                <center>
-                                    <h1 class="fa fa-cutlery"></h1>
-                                    <h2>به زودی افتتاح خواهد شد</h2>
-                                    <h3>رزرو رستوران</h3>
-                                </center>
-                            </div>
-                            <div class="bhoechie-tab-content">
-                                <center>
-                                    <h1 class="fa fa-credit-card"></h1>
-                                    <h2>به زودی افتتاح خواهد شد</h2>
-                                    <h3>دریافت کارت اعتباری</h3>
-                                </center>
-                            </div>
+                           
                         </div>
                         <!-- end tab content -->
                     </div>

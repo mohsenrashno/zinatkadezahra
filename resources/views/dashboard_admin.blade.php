@@ -40,7 +40,7 @@
                                 <h4 class="fa fa-credit-card"></h4><br />ارجاع کارها
                             </a>
                             <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-cutlery"></h4><br /> ثبت نام خیاط
+                                <h4 class="fa fa-cutlery"></h4><br /> ثبت محصولات
                             </a>
 
                         </div>
@@ -321,9 +321,48 @@
                         </div>
                         <div class="bhoechie-tab-content">
                             <center>
-                                <h1 class="fa fa-credit-card"></h1>
-                                <h2>به زودی افتتاح خواهد شد</h2>
-                                <h3>دریافت کارت اعتباری</h3>
+                                <form method="GET" action="{{ route('pruductRegister') }}">
+                                    @csrf
+
+                                    <div>
+                                        <x-input-label for="name" :value="__('نام')" />
+                                        <x-text-input id="name" class="block mt-1 w-full" type="text"
+                                            name="name" :value="old('name')" required autofocus autocomplete="name"
+                                            style="background-color:yellow; direction:rtl" />
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                    </div>
+
+
+                                    <div class="mt-4">
+                                        <x-input-label for="type" :value="__('نوع')" />
+                                        <x-text-input id="type" class="block mt-1 w-full" type="text"
+                                            name="type" :value="old('text')" required autocomplete="type"
+                                            style="background-color:yellow; direction:rtl" />
+                                        <x-input-error :messages="$errors->get('type')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Email Address -->
+                                    <div class="mt-4">
+                                        <x-input-label for="size" :value="__('اندازه')" />
+                                        <x-text-input id="size" class="block mt-1 w-full" type="text"
+                                            name="size" :value="old('text')" required autocomplete="size"
+                                            style="background-color:yellow; direction:rtl" />
+                                        <x-input-error :messages="$errors->get('size')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Email Address -->
+                                    <div class="mt-4">
+                                        <x-input-label for="price" :value="__('قیمت')" />
+                                        <x-text-input id="price" class="block mt-1 w-full" type="text"
+                                            name="price" :value="old('text')" required autocomplete="price"
+                                            style="background-color:yellow; direction:rtl" />
+                                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                                    </div>
+
+                                    <div class="flex items-center justify-end mt-4">
+                                        <input type="submit" style="--c:#E95A49" value="ثبت">
+                                    </div>
+                                </form>
                             </center>
                         </div>
                     </div>

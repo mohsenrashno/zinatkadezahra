@@ -22,7 +22,7 @@ return new class extends Migration
 			$table->date('finisheddate')->nullable();
 			$table->date('posteddate')->nullable();
 			$table->date('deliverydate')->nullable();
-			$table->enum('paidstatus',['internet', 'card', 'bank', 'cash'])->nullable();
+			$table->enum('paidstatus',['درگاه اینترنتی', 'کارت', 'حساب بانکی', 'نقد'])->nullable();
 			$table->string('price')->nullable();
 			
 			

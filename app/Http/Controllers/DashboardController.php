@@ -54,6 +54,20 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function tailor()
+    {
+        $user_id = auth()->user()->id;
+        // $customers = User::where('role', 'customer')->get();
+        // $tailors = User::where('role', 'tailor')->get();
+        // $products = Product::all();
+        $orders = Order::all();
+
+        return view('dashboard_tailor', [
+            'user_id' => $user_id,    
+            'orders' => $orders
+        ]);
+    }
+
 
     static public function products($order_id)
     {
@@ -63,11 +77,12 @@ class DashboardController extends Controller
 
     public function payment(Request $request)
     {
+        // return dd($request->paymentType);
         //  $r = DB::update('update orders set price = 23000');
         // $r = DB::update('update orders set paiddate = 100 where id = ?', array($request->id));
         //$r = DB::insert('insert into orders (id, paiddate) values (?, ?)', array($request->id, '1402-02-30'));
         $current_date = date("Y-m-d") . " " . date("h:i:s");
-        $r = DB::table('orders')->where('id', $request->id)->update(array('paiddate' => $current_date, 'paidstatus' => 4));
+        $r = DB::table('orders')->where('id', $request->id)->update(array('paiddate' => $current_date, 'paidstatus' => $request->paymentType));
         //    $r = DB::table('orders')->where('id', $request->id)->update(array());
 
         return DashboardController::role();
@@ -112,7 +127,6 @@ class DashboardController extends Controller
     public function cart(Request $request)
     {
         $order_id = $request->id;
-
 
         $user_id = auth()->user()->id;
         $order = Order::find($order_id);

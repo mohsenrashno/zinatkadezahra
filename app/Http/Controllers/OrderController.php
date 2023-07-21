@@ -18,21 +18,18 @@ class OrderController extends Controller
         $order_id = null;
         $price = Product::find($product_id)->price;
 
-       // return dd(Carbon\Carbon::now());
+        // return dd(Carbon\Carbon::now());
         $lastOrder = User::find($user_id)->orders();
-        if($lastOrder->get()->last() != null && $lastOrder->get()->last()->paiddate == null)
-        {
+        if ($lastOrder->get()->last() != null && $lastOrder->get()->last()->paiddate == null) {
             $order_id = $lastOrder->get()->last()->id;
-        }
-        else
-        {
-            $current_date = date("Y-m-d")." ". date("h:i:s");
+        } else {
+            $current_date = date("Y-m-d") . " " . date("h:i:s");
             $temp = Order::Create(['user_id' => $user_id, 'orderdate' => $current_date]);
             $order_id = $temp->id;
         }
 
 
-        $data=array('order_id'=>$order_id,"product_id"=>$product_id,"user_id"=>$user_id,"price"=>$price);
+        $data = array('order_id' => $order_id, 'product_id' => $product_id, 'user_id' => $user_id, 'count' => 1, 'price' => $price);
         $t = DB::table('order_product')->insert($data);
 
         //for update sum of price
@@ -40,9 +37,9 @@ class OrderController extends Controller
         $new_price = $new_price + $price;
         $r = DB::table('orders')->where('id', $order_id)->update(array('price' => $new_price));
 
-      //  return dd($t);
+        //  return dd($t);
 
-        return view('welcome',['role'=>$role]);
+        return view('welcome', ['role' => $role]);
 
     }
 }

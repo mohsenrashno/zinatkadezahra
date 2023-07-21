@@ -261,9 +261,10 @@
                                             <option value="4">پاکستان</option>
                                         </select>
                                         <input class="post_code" type="text" id="address_field"
-                                            placeholder="آدرس" value={{$address}} />
+                                            placeholder="آدرس" value={{ $address }} />
                                         <input class="post_code" type="text" placeholder="کدپستی" />
-                                        <a class="btn_1" href="{{ route('payment', ['id' => $order]) }}"
+                                        <a class="btn_1" href="{{ route('payment', ['id' => $order, 'paymentType' => 'نقد' ]) }}" 
+                                            {{-- href="javascript:showfunction()" --}}
                                             onclick="verifyData()"> پرداخت</a>
                                     </div>
                                 </td>
@@ -341,6 +342,15 @@
     <!--::footer_part end::-->
 
     <!-- jquery plugins here-->
+    {{-- <script>
+        function showfunction() {
+            var id = document.querySelector('input[name = "payment"]:checked').value;
+            var url = "{{ route('payment', ['id' => $order, 'paymentType' => `{id}`]) }}";
+          //  url = url.replace('id', id);
+            document.location.href = url;
+        }
+    </script> --}}
+
     <script>
         function verifyData() {
             var empt1 = document.getElementById('address_field');
@@ -352,6 +362,15 @@
                 alert("فیلد آدرس و نحوه پرداخت الزامی است!");
                 event.preventDefault();
             } else {
+                if (empt2.checked) {
+                    $paymentType = 'درگاه اینترنتی';
+                } else if (empt3.checked) {
+                    $paymentType = 'کارت ';
+                } else if (empt4.checked) {
+                    $paymentType = 'حساب بانکی ';
+                } else {
+                    $paymentType = 'نقد ';
+                }
                 alert("پرداخت با موفقیت انجام شد.!");
             }
         }
