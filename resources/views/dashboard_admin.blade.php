@@ -255,6 +255,7 @@
                                                             <th class="column2"> نام مشتری </th>
                                                             <th class="column3"> نام کالا</th>
                                                             <th class="column4"> نام خیاط</th>
+                                                            <th class="column5"> ثبت </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -278,7 +279,7 @@
                                                                     <td class="column3">{{ $product->name }}
                                                                     </td>
 
-                                                                    <td class="column3">
+                                                                    <td class="column4">
                                                                         @php
                                                                             $tailors = App\Models\User::all()->where('role', 'tailor');
                                                                         @endphp
@@ -292,21 +293,16 @@
 
                                                                         </select>
                                                                     </td>
-                                                                    <td class="column4">
-                                                                        @php
-                                                                            $temp_record = DB::table('order_product')
-                                                                                ->where('order_id', $order->id)
-                                                                                ->where('product_id', $product->id)
-                                                                                ->first();
-                                                                        @endphp
-                                                                        @if ($temp_record->user_id == null)
-                                                                            <button style="--c:#E95A49"><a
-                                                                                    href="{{ route('delivery', ['id' => $order]) }}">ثبت</a></button>
-                                                                        @else
-                                                                            {{ $order->deliverydate }}
-                                                                        @endif
+                                                                    <td class="column5">
+                                                                        {{-- @if ($order->finisheddate == null) --}}
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('select_tailor', ['id' => $order]) }}">ثبت</a></button>
+                                                                        {{-- @else
+                                                                            {{ $order->finisheddate }}
+                                                                        @endif --}}
 
                                                                     </td>
+
                                                                 </tr>
                                                             @endforeach
                                                         @endforeach

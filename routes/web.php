@@ -37,6 +37,7 @@ Route::get('finished/{id}', [DashboardController::class, 'finished'])->name('fin
 Route::get('delivery/{id}', [DashboardController::class, 'delivery'])->name('delivery');
 Route::get('cart/{id}', [DashboardController::class, 'cart'])->name('cart');
 Route::get('/product_register}', [ProductController::class, 'product_register'])->name('pruductRegister');
+Route::get('select_tailor', [DashboardController::class, 'select_tailor'])->name('select_tailor');
 
 
 require __DIR__ . '/auth.php';

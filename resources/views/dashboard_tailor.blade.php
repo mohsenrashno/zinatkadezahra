@@ -28,20 +28,12 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                         <div class="list-group">
                             <a href="#" class="list-group-item active text-center">
-                                <h4 class="fa fa-plane"></h4><br />سفارشات
+                                <h4 class="fa fa-plane"></h4><br />ثبت آماده سازی
                             </a>
                             <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-road"></h4><br />مشتری
+                                <h4 class="fa fa-road"></h4><br />کارها
                             </a>
-                            <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-home"></h4><br />خیاط
-                            </a>
-                            <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-credit-card"></h4><br />ارجاع کارها
-                            </a>
-                            <a href="#" class="list-group-item text-center">
-                                <h4 class="fa fa-cutlery"></h4><br /> ثبت نام خیاط
-                            </a>
+
 
                         </div>
                     </div>
@@ -66,9 +58,8 @@
                                                         <tr class="table100-head">
                                                             <th class="column1">شماره سفارش</th>
                                                             <th class="column2">نام محصول </th>
-                                                            <th class="column3"> تاریخ سفارش</th>
-                                                            <th class="column4"> شروع آماده سازی</th>
-                                                            <th class="column5"> هزینه</th>
+                                                            <th class="column3"> شروع آماده سازی</th>
+                                                            <th class="column4"> هزینه</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -81,12 +72,9 @@
                                                             @endphp
                                                             <tr>
                                                                 @foreach ($products as $product)
-                                                                    $all_products .= $temp->name;
-                                                                    $all_products .= ', ';
-
                                                                     <td class="column1">{{ $order->id }}</td>
                                                                     <td class="column2">
-                                                                        {{ product->name }}
+                                                                        {{ $product->name }}
                                                                     </td>
                                                                     <td class="column3">
                                                                         @if ($order->preparingdate == null)
@@ -96,11 +84,51 @@
                                                                             {{ $order->preparingdate }}
                                                                         @endif
                                                                     </td>
-                                                                    <td class="column4">{{ ($order->price * 2) / 3 }}
+                                                                    @php
+                                                                        $rounded_price = round(($order->price * 2) / 3);
+                                                                    @endphp
+                                                                    <td class="column4">{{ $rounded_price }}
                                                                     </td>
                                                                 @endforeach
                                                             </tr>
                                                         @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+
+                        <div class="bhoechie-tab-content">
+                            <center>
+                                <div class="limiter">
+                                    <div class="container-table100">
+                                        <div class="wrap-table100">
+                                            <div class="table100">
+                                                <table>
+                                                    <thead>
+                                                        <tr class="table100-head">
+                                                            <th class="column1">تعداد کارها</th>
+                                                            <th class="column2">مجموع هزینه ها </th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+
+                                                        <tr>
+
+                                                            <td class="column1">{{ $count_work }}</td>
+                                                            <td class="column2">
+                                                                {{ $sum_price }}
+                                                            </td>
+
+
+                                                        </tr>
+
 
                                                     </tbody>
                                                 </table>

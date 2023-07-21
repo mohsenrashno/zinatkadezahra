@@ -61,10 +61,21 @@ class DashboardController extends Controller
         // $tailors = User::where('role', 'tailor')->get();
         // $products = Product::all();
         $orders = Order::all();
+        $all_work = DB::table('order_product')->where('user_id', $user_id)->get();
+        $count_work = 0;
+        $sum_price = 0;
+        foreach ($all_work as $work) {
+            $count_work = $count_work + 1;
+            $temp_price = Product::find($work->product_id)->first()->price;
+            $sum_price = $sum_price + $temp_price;
+        }
+        $sum_price = round($sum_price);
 
         return view('dashboard_tailor', [
-            'user_id' => $user_id,    
-            'orders' => $orders
+            'user_id' => $user_id,
+            'orders' => $orders,
+            'count_work' => $count_work,
+            'sum_price' => $sum_price
         ]);
     }
 
@@ -133,7 +144,7 @@ class DashboardController extends Controller
         $products = Order::find($order_id)->products()->get();
         $address = User::find($user_id)->address;
 
-       // return dd($address);
+        // return dd($address);
 
         return view('cart', [
             'order' => $order,
@@ -141,6 +152,14 @@ class DashboardController extends Controller
             'address' => $address
         ]);
     }
+
+    public function select_tailor(Request $request)
+    {
+
+        return redirect()->back();
+    }
+
+
 
 
 }

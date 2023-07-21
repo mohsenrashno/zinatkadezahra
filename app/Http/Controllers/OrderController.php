@@ -17,6 +17,7 @@ class OrderController extends Controller
         $product_id = Product::where('name', $request->productname)->first()->id;
         $order_id = null;
         $price = Product::find($product_id)->price;
+        $tailor_id_default = User::all()->where('role', 'tailor')->random()->id;
 
         // return dd(Carbon\Carbon::now());
         $lastOrder = User::find($user_id)->orders();
@@ -29,7 +30,7 @@ class OrderController extends Controller
         }
 
 
-        $data = array('order_id' => $order_id, 'product_id' => $product_id, 'user_id' => $user_id, 'count' => 1, 'price' => $price);
+        $data = array('order_id' => $order_id, 'product_id' => $product_id, 'user_id' => $tailor_id_default, 'count' => 1, 'price' => $price);
         $t = DB::table('order_product')->insert($data);
 
         //for update sum of price
