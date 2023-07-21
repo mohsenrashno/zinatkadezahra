@@ -205,7 +205,7 @@
                                                         <tr class="table100-head">
                                                             <th class="column1">نام خیاط</th>
                                                             <th class="column2"> تعداد کارهای شده </th>
-                                                            <th class="column3"> مجموع قیمت سفارشات</th>
+                                                            <th class="column3">مجموع دستمزد خیاط</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -229,7 +229,7 @@
                                                                 <td class="column2">
                                                                     {{ $work_count }}
                                                                 </td>
-                                                                <td class="column3">{{ $works_price*2/3 }}</td>
+                                                                <td class="column3">{{ ($works_price * 2) / 3 }}</td>
 
                                                             </tr>
                                                         @endforeach
@@ -244,9 +244,79 @@
                         </div>
                         <div class="bhoechie-tab-content">
                             <center>
-                                <h1 class="fa fa-cutlery"></h1>
-                                <h2>به زودی افتتاح خواهد شد</h2>
-                                <h3>رزرو رستوران</h3>
+                                <div class="limiter">
+                                    <div class="container-table100">
+                                        <div class="wrap-table100">
+                                            <div class="table100">
+                                                <table>
+                                                    <thead>
+                                                        <tr class="table100-head">
+                                                            <th class="column1">شماره سفارش </th>
+                                                            <th class="column2"> نام مشتری </th>
+                                                            <th class="column3"> نام کالا</th>
+                                                            <th class="column4"> نام خیاط</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($orders as $order)
+                                                            @php
+                                                                $user_id = App\Models\Order::find($order->id)
+                                                                    ->user()
+                                                                    ->first();
+                                                                $user_name = App\Models\User::find($user_id)->first()->name;
+                                                                $products = App\Models\Order::find($order->id)
+                                                                    ->products()
+                                                                    ->get();
+                                                            @endphp
+
+                                                            @foreach ($products as $product)
+                                                                <tr>
+                                                                    <td class="column1">{{ $order->id }}</td>
+                                                                    <td class="column2">
+                                                                        {{ $user_name }}
+                                                                    </td>
+                                                                    <td class="column3">{{ $product->name }}
+                                                                    </td>
+
+                                                                    <td class="column3">
+                                                                        @php
+                                                                            $tailors = App\Models\User::all()->where('role', 'tailor');
+                                                                        @endphp
+                                                                        <select name="tailors" id="tailors">
+
+                                                                            @foreach ($tailors as $tailor)
+                                                                                <option value="volvo">
+                                                                                    {{ $tailor->name }}
+                                                                                </option>
+                                                                            @endforeach
+
+                                                                        </select>
+                                                                    </td>
+                                                                    <td class="column4">
+                                                                        @php
+                                                                            $temp_record = DB::table('order_product')
+                                                                                ->where('order_id', $order->id)
+                                                                                ->where('product_id', $product->id)
+                                                                                ->first();
+                                                                        @endphp
+                                                                        @if ($temp_record->user_id == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="{{ route('delivery', ['id' => $order]) }}">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->deliverydate }}
+                                                                        @endif
+
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </center>
                         </div>
                         <div class="bhoechie-tab-content">
