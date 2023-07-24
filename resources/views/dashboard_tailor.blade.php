@@ -123,7 +123,10 @@
                                                         <tr>
                                                             <td class="column1">{{ $count_work }}</td>
                                                             <td class="column2">
-                                                                {{ ($sum_price * 2) / 3 }}
+                                                                @php
+                                                                    $rounded_price2 = round(($sum_price * 2) / 3);
+                                                                @endphp
+                                                                {{ $rounded_price2 }}
                                                             </td>
 
                                                         </tr>

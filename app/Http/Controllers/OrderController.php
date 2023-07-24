@@ -21,7 +21,7 @@ class OrderController extends Controller
 
         // return dd(Carbon\Carbon::now());
         $lastOrder = User::find($user_id)->orders();
-        if ($lastOrder->get()->last() != null && $lastOrder->get()->last()->paiddate == null) {
+        if ($lastOrder->get()->last() != null && $lastOrder->get()->last()->paiddate == null && $lastOrder->get()->last()->canceleddate == null) {
             $order_id = $lastOrder->get()->last()->id;
         } else {
             $current_date = date("Y-m-d") . " " . date("h:i:s");

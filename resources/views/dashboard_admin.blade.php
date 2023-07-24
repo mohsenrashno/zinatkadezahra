@@ -91,12 +91,8 @@
                                                                     </td>
                                                                     <td class="column2">{{ $order->orderdate }}</td>
                                                                     <td class="column3">
-                                                                        @if ($order->ordercanceleddate == null)
-                                                                            <button style="--c:#E95A49"><a
-                                                                                    href="{{ route('canceled', ['order_id' => $order]) }}">ثبت</a></button>
-                                                                        @else
-                                                                            {{ $order->ordercanceleddate }}
-                                                                        @endif
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('canceled', ['order_id' => $order]) }}">ثبت</a></button>
                                                                     </td>
                                                                     <td class="column4">{{ $order->paidstatus }}</td>
                                                                     <td class="column5">{{ $order->paiddate }}</td>
@@ -139,12 +135,7 @@
                                                                     </td>
                                                                     <td class="column2">{{ $order->orderdate }}</td>
                                                                     <td class="column3">
-                                                                        @if ($order->canceleddate == null)
-                                                                            <button style="--c:#E95A49"><a
-                                                                                    href="">ثبت</a></button>
-                                                                        @else
-                                                                            {{ $order->ordercanceleddate }}
-                                                                        @endif
+                                                                            {{ $order->canceleddate }}
                                                                     </td>
                                                                     <td class="column4">{{ $order->paidstatus }}</td>
                                                                     <td class="column5">{{ $order->paiddate }}</td>
@@ -206,7 +197,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        
+
                                                         @foreach ($customers as $customer)
                                                             @php
                                                                 $temp_orders = App\Models\User::find($customer->id)
@@ -227,7 +218,7 @@
                                                                     $orders_price = $orders_price + $temp_price;
                                                                 }
                                                             @endphp
-                                                        
+
                                                             <tr>
                                                                 <td class="column1">{{ $customer->name }}</td>
                                                                 <td class="column2">

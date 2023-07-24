@@ -41,3 +41,18 @@ button {
   font-weight: regular;  
   border: none;
 }
+
+
+.btn_1 {
+  display: inline-block;
+  padding: 17px 50px;
+  border-radius: 5px;
+  background-color: #B08EAD;
+  border: 2px solid #B08EAD;
+  font-size: 15px;
+  font-weight: 500;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  text-transform: capitalize;
+  color: #fff;
+}

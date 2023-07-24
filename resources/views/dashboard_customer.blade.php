@@ -25,7 +25,8 @@
         <body>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container" style="top:-150px; right:-5px">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container"
+                        style="top:-150px; right:-5px">
                         <!-- start tab list -->
                         <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                             <div class="list-group">
@@ -73,49 +74,99 @@
                                                                     }
                                                                 @endphp
                                                                 @if ($order->paidstatus == null)
-                                                                    <tr
-                                                                        onclick="window.location='{{ route('cart', ['order' => $order]) }}'">
-                                                                        <td class="column1">{{ $order->id }}</td>
-                                                                        <td class="column2">{{ $order->orderdate }}</td>
-                                                                        <td class="column3">
-                                                                            {{ $order->ordercanceleddate }}
-                                                                        </td>
-                                                                        <td class="column4">{{ $order->paidstatus }}
-                                                                        </td>
-                                                                        <td class="column5">{{ $order->paiddate }}</td>
-                                                                        <td class="column6">{{ $order->preparingdate }}
-                                                                        </td>
-                                                                        <td class="column7">{{ $order->finisheddate }}
-                                                                        </td>
-                                                                        <td class="column8">{{ $order->deliverydate }}
-                                                                        </td>
-                                                                        <td class="column9"> {{ $all_products }}</td>
-                                                                        <td class="column10">{{ $order->price }}</td>
-                                                                        {{-- <td class="column11"><button
+                                                                    @if ($order->canceleddate == null)
+                                                                        <tr  onclick="window.location='{{ route('cart', ['order' => $order]) }}'">
+                                                                            <td class="column1">{{ $order->id }}</td>
+                                                                            <td class="column2">{{ $order->orderdate }}
+                                                                            </td>
+                                                                            <td class="column3">
+                                                                                <button style="--c:#E95A49"><a
+                                                                                        href="{{ route('canceled', ['order_id' => $order]) }}">ثبت</a></button>
+                                                                            </td>
+                                                                            <td class="column4">{{ $order->paidstatus }}
+                                                                            </td>
+                                                                            <td class="column5">{{ $order->paiddate }}
+                                                                            </td>
+                                                                            <td class="column6">
+                                                                                {{ $order->preparingdate }}
+                                                                            </td>
+                                                                            <td class="column7">
+                                                                                {{ $order->finisheddate }}
+                                                                            </td>
+                                                                            <td class="column8">
+                                                                                {{ $order->deliverydate }}
+                                                                            </td>
+                                                                            <td class="column9"> {{ $all_products }}
+                                                                            </td>
+                                                                            <td class="column10">{{ $order->price }}
+                                                                            </td>
+                                                                            {{-- <td class="column11"><button
                                                                                 style="--c:#E95A49"><a
                                                                                     href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
                                                                         </td> --}}
-                                                                    </tr>
+                                                                        </tr>
+                                                                    @else
+                                                                        <tr style="cursor:default; background-color:red;"
+                                                                            onclick="canceledAlert()">
+                                                                            <td class="column1">{{ $order->id }}
+                                                                            </td>
+                                                                            <td class="column2">{{ $order->orderdate }}
+                                                                            </td>
+                                                                            <td class="column3">
+                                                                                {{ $order->canceleddate }}
+                                                                            </td>
+                                                                            <td class="column4">
+                                                                                {{ $order->paidstatus }}
+                                                                            </td>
+                                                                            <td class="column5">{{ $order->paiddate }}
+                                                                            </td>
+                                                                            <td class="column6">
+                                                                                {{ $order->preparingdate }}
+                                                                            </td>
+                                                                            <td class="column7">
+                                                                                {{ $order->finisheddate }}
+                                                                            </td>
+                                                                            <td class="column8">
+                                                                                {{ $order->deliverydate }}
+                                                                            </td>
+                                                                            <td class="column9"> {{ $all_products }}
+                                                                            </td>
+                                                                            <td class="column10">{{ $order->price }}
+                                                                            </td>
+                                                                            {{-- <td class="column11"><button
+                                                                            style="--c:#E95A49"><a
+                                                                                href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
+                                                                    </td> --}}
+                                                                        </tr>
+                                                                    @endif
                                                                 @else
                                                                     <tr style="cursor:default; background-color:yellow"
                                                                         onclick="paymentAlert()">
-                                                                        <td class="column1">{{ $order->id }}</td>
+                                                                        <td class="column1">{{ $order->id }}
+                                                                        </td>
                                                                         <td class="column2">{{ $order->orderdate }}
                                                                         </td>
                                                                         <td class="column3">
                                                                             {{ $order->ordercanceleddate }}
                                                                         </td>
-                                                                        <td class="column4">{{ $order->paidstatus }}
+                                                                        <td class="column4">
+                                                                            {{ $order->paidstatus }}
                                                                         </td>
-                                                                        <td class="column5">{{ $order->paiddate }}</td>
-                                                                        <td class="column6">{{ $order->preparingdate }}
+                                                                        <td class="column5">{{ $order->paiddate }}
                                                                         </td>
-                                                                        <td class="column7">{{ $order->finisheddate }}
+                                                                        <td class="column6">
+                                                                            {{ $order->preparingdate }}
                                                                         </td>
-                                                                        <td class="column8">{{ $order->deliverydate }}
+                                                                        <td class="column7">
+                                                                            {{ $order->finisheddate }}
                                                                         </td>
-                                                                        <td class="column9"> {{ $all_products }}</td>
-                                                                        <td class="column10">{{ $order->price }}</td>
+                                                                        <td class="column8">
+                                                                            {{ $order->deliverydate }}
+                                                                        </td>
+                                                                        <td class="column9"> {{ $all_products }}
+                                                                        </td>
+                                                                        <td class="column10">{{ $order->price }}
+                                                                        </td>
                                                                         {{-- <td class="column11"><button
                                                                                 style="--c:#E95A49"><a
                                                                                     href="{{ route('cart', ['id' => $order]) }}">پرداخت</a></button>
@@ -142,6 +193,12 @@
             <script>
                 function paymentAlert() {
                     alert("پرداخت شده است!");
+                }
+            </script>
+
+            <script>
+                function canceledAlert() {
+                    alert("  سفارش لغو شده است!");
                 }
             </script>
             <script src="{{ asset('js/jquery_dashboard-3.1.1.min.js') }}"></script>
