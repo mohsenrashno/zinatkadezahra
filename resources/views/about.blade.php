@@ -25,10 +25,10 @@
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 
 <body class="rtl">
-
     <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container">
@@ -52,15 +52,15 @@
                                     <a class="nav-link" href="{{ route('about') }}">درباره ما</a>
                                 </li>
                                 {{-- <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="{{ route('product_list') }}"
-                                        id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        محصولات
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="{{ route('product_list') }}"> لیست محصولات</a>
-                                    </div>
-                                </li> --}}
+                                <a class="nav-link dropdown-toggle" href="{{ route('product_list') }}"
+                                    id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    محصولات
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="{{ route('product_list') }}"> لیست محصولات</a>
+                                </div>
+                            </li> --}}
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('product_list') }}">محصولات </a>
@@ -98,136 +98,39 @@
         </header>
         <!-- Header part end-->
 
-        <!-- banner part start-->
-        <section class="banner_part">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-5">
-                        <div class="banner_text">
-                            <div class="banner_text_iner">
-                                <h1> دوخت وسایل آشپزخانه
-                                </h1>
-                                <p>تنوع در طرح، رنگ و جنس پارچه </p>
-                                <a href="{{ route('product_list') }}" class="btn_1">همین الان خرید کنید</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="banner_img">
-                <img src="{{ asset('img/banner.png') }}" alt="#" class="img-fluid">
-                <img src="{{ asset('img/banner_pattern.png') }}" alt="#" class="pattern_img img-fluid">
-            </div>
-        </section>
-        <!-- banner part start-->
-
-        <!-- product list start-->
-        <section class="single_product_list">
+        <!-- breadcrumb part start-->
+        <section class="breadcrumb_part">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="single_product_iner">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_img">
-                                        <img src="{{ asset('img/dastkheshfer.png') }}" class="img-fluid" alt="#">
-                                        <img src="{{ asset('img/product_overlay.png') }}" alt="#"
-                                            class="product_overlay img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="single_product_content">
-                                        <h5> قیمت 150000 تومان</h5>
-                                        <h2> <a href="{{ route('single-product', ['id', 4]) }}"></a> دستکش فر گلدوزی شده
-                                        </h2>
-                                        <a href="{{ route('product_list') }}" class="btn_3">امتحان کنید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_product_iner">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_img">
-                                        <img src="{{ asset('img/dastgir.png') }}" class="img-fluid" alt="#">
-                                        <img src="{{ asset('img/product_overlay.png') }}" alt="#"
-                                            class="product_overlay img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="single_product_content">
-                                        <h5> قیمت 110000 تومان</h5>
-                                        <h2> <a href="{{ route('single-product', ['id', 1]) }}">دستگیر تکه دوزی شده</a>
-                                        </h2>
-                                        <a href="{{ route('product_list') }}" class="btn_3">امتحان کنید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_product_iner">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_img">
-                                        <img src="{{ asset('img/hole.png') }}" class="img-fluid"
-                                            alt="#">
-                                        <img src="{{ asset('img/product_overlay.png') }}" alt="#"
-                                            class="product_overlay img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="single_product_content">
-                                        <h5> قیمت 220000 تومان</h5>
-                                        <h2> <a href="{{ route('single-product', ['id', 6]) }}"> حوله آشپزخانه</a>
-                                        </h2>
-                                        <a href="{{ route('product_list') }}" class="btn_3">امتحان کنید</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="breadcrumb_iner">
+                            <h2>درباره ما</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- product list end-->
+        <!-- breadcrumb part end-->
 
-
-
-
-        <!-- client review part here -->
-        <section class="client_review " style="direction: ltr">
+        <!-- product list part start-->
+        <section class="about_us padding_top">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="client_review_slider owl-carousel ">
-                            <div class="single_client_review" dir="rtl">
-                                <div class="client_img">
-                                    <img src="{{ asset('img/client.png') }}" alt="#">
-                                </div>
-                                <p>خداوند زیباست و زیبایی را دوست دارد، خانه هایمان را زیبا کنیم.</p>
-                                <h5> محسن رشنو</h5>
-                            </div>
-                            <div class="single_client_review" dir="rtl">
-                                <div class="client_img">
-                                    <img src="{{ asset('img/client.png') }}" alt="#">
-                                </div>
-                                <p>نظم جزء الزامات زندگی است با وسایل نظم دهنده زندگیمان را منظم کنیم.</p>
-                                <h5> </h5>
-                            </div>
-                            <div class="single_client_review" dir="rtl">
-                                <div class="client_img">
-                                    <img src="{{ asset('img/client.png') }}" alt="#">
-                                </div>
-                                <p>انسان برای زندگی به انگیره نیاز دارد با وسایل خوب و زیبا انگیزه را وارد زندگی خود کنیم.
-                                </p>
-                                <h5> محسن رشنو</h5>
+                        <div class="about_us_content">
+                            <h5>هدف ما</h5>
+                            <h3>هدف ما تولید محصولات با کیفیت بوده با آنها آشپزخانه خانه خود را زیبا کنید.</h3>
+                            <div class="about_us_video">
+                                <img src="{{ asset('img/about.jpg') }}" alt="#" class="img-fluid">
+                                <a class="about_video_icon popup-youtube"
+                                    href=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- client review part end -->
-
+        <!-- product list part end-->
 
         <!-- feature part here -->
         <section class="feature_part section_padding">
@@ -275,6 +178,41 @@
         </section>
         <!-- feature part end -->
 
+        <!-- client review part here -->
+        <section class="client_review " style="direction: ltr">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="client_review_slider owl-carousel ">
+                            <div class="single_client_review" dir="rtl">
+                                <div class="client_img">
+                                    <img src="{{ asset('img/client.png') }}" alt="#">
+                                </div>
+                                <p>خداوند زیباست و زیبایی را دوست دارد، خانه هایمان را زیبا کنیم.</p>
+                                <h5> محسن رشنو</h5>
+                            </div>
+                            <div class="single_client_review" dir="rtl">
+                                <div class="client_img">
+                                    <img src="{{ asset('img/client.png') }}" alt="#">
+                                </div>
+                                <p>نظم جزء الزامات زندگی است با وسایل نظم دهنده زندگیمان را منظم کنیم.</p>
+                                <h5> </h5>
+                            </div>
+                            <div class="single_client_review" dir="rtl">
+                                <div class="client_img">
+                                    <img src="{{ asset('img/client.png') }}" alt="#">
+                                </div>
+                                <p>انسان برای زندگی به انگیره نیاز دارد با وسایل خوب و زیبا انگیزه را وارد زندگی خود کنیم.
+                                </p>
+                                <h5> محسن رشنو</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- client review part end -->
+
         <!-- subscribe part here -->
         <section class="subscribe_part section_padding">
             <div class="container">
@@ -284,9 +222,9 @@
                             <h2>به روز رسانی و مطالب پیشرفته!</h2>
                             <p>ما سعی می کنیم با کیفیت ترین و زیباترین محصولات را برای شما تولید کنیم .</p>
                             {{-- <div class="subscribe_form">
-                            <input type="email" placeholder="ایمیل خود را وارد کنید">
-                            <a href="#" class="btn_1">تایید پرداخت</a>
-                        </div> --}}
+                        <input type="email" placeholder="ایمیل خود را وارد کنید">
+                        <a href="#" class="btn_1">تایید پرداخت</a>
+                    </div> --}}
                         </div>
                     </div>
                 </div>
@@ -378,5 +316,4 @@
         <!-- custom js -->
         <script src="{{ asset('js/custom.js') }}"></script>
     </body>
-
     </html>

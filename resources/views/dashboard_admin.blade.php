@@ -17,13 +17,14 @@
         <link rel="stylesheet" href="{{ asset('css/font_dashboard-awesome.min.css') }}">
         <link type="text/css" href="{{ asset('css/style_table.css') }}" rel="stylesheet" />
         <link type="text/css" href="{{ asset('css/style_button.css') }}" rel="stylesheet" />
+        {{-- <link type="text/css" href="{{ asset('css/style.css') }}" rel="stylesheet" /> --}}
         <!-- end styles and css -->
     </head>
 
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container" style="top:-150px; right:-5px">
                     <!-- start tab list -->
                     <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                         <div class="list-group">
@@ -82,46 +83,102 @@
                                                                     $all_products .= ', ';
                                                                 }
                                                             @endphp
-                                                            <tr>
-                                                                <td class="column1">{{ $order->id }}</td>
-                                                                <td class="column12">
-                                                                    {{ App\Models\Order::find($order->id)->user()->first()->name }}
-                                                                </td>
-                                                                <td class="column2">{{ $order->orderdate }}</td>
-                                                                <td class="column3">{{ $order->ordercanceleddate }}
-                                                                </td>
-                                                                <td class="column4">{{ $order->paidstatus }}</td>
-                                                                <td class="column5">{{ $order->paiddate }}</td>
-                                                                <td class="column6">
-                                                                    @if ($order->preparingdate == null)
-                                                                        <button style="--c:#E95A49"><a
-                                                                                href="{{ route('preparing', ['id' => $order]) }}">ثبت</a></button>
-                                                                    @else
-                                                                        {{ $order->preparingdate }}
-                                                                    @endif
+                                                            @if ($order->canceleddate == null)
+                                                                <tr>
+                                                                    <td class="column1">{{ $order->id }}</td>
+                                                                    <td class="column12">
+                                                                        {{ App\Models\Order::find($order->id)->user()->first()->name }}
+                                                                    </td>
+                                                                    <td class="column2">{{ $order->orderdate }}</td>
+                                                                    <td class="column3">
+                                                                        @if ($order->ordercanceleddate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="{{ route('canceled', ['order_id' => $order]) }}">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->ordercanceleddate }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="column4">{{ $order->paidstatus }}</td>
+                                                                    <td class="column5">{{ $order->paiddate }}</td>
+                                                                    <td class="column6">
+                                                                        @if ($order->preparingdate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="{{ route('preparing', ['order_id' => $order]) }}">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->preparingdate }}
+                                                                        @endif
 
-                                                                </td>
-                                                                <td class="column7">
-                                                                    @if ($order->finisheddate == null)
-                                                                        <button style="--c:#E95A49"><a
-                                                                                href="{{ route('finished', ['id' => $order]) }}">ثبت</a></button>
-                                                                    @else
-                                                                        {{ $order->finisheddate }}
-                                                                    @endif
-                                                                </td>
-                                                                <td class="column8">
+                                                                    </td>
+                                                                    <td class="column7">
+                                                                        @if ($order->finisheddate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="{{ route('finished', ['order_id' => $order]) }}">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->finisheddate }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="column8">
 
-                                                                    @if ($order->deliverydate == null)
-                                                                        <button style="--c:#E95A49"><a
-                                                                                href="{{ route('delivery', ['id' => $order]) }}">ثبت</a></button>
-                                                                    @else
-                                                                        {{ $order->deliverydate }}
-                                                                    @endif
-                                                                </td>
-                                                                <td class="column9"> {{ $all_products }}</td>
-                                                                <td class="column10">{{ $order->price }}</td>
+                                                                        @if ($order->deliverydate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="{{ route('delivery', ['order_id' => $order]) }}">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->deliverydate }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="column9"> {{ $all_products }}</td>
+                                                                    <td class="column10">{{ $order->price }}</td>
 
-                                                            </tr>
+                                                                </tr>
+                                                            @else
+                                                                <tr style="cursor:default; background-color:red"
+                                                                    onclick="canceledAlert()">
+                                                                    <td class="column1">{{ $order->id }}</td>
+                                                                    <td class="column12">
+                                                                        {{ App\Models\Order::find($order->id)->user()->first()->name }}
+                                                                    </td>
+                                                                    <td class="column2">{{ $order->orderdate }}</td>
+                                                                    <td class="column3">
+                                                                        @if ($order->canceleddate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->ordercanceleddate }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="column4">{{ $order->paidstatus }}</td>
+                                                                    <td class="column5">{{ $order->paiddate }}</td>
+                                                                    <td class="column6">
+                                                                        @if ($order->preparingdate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->preparingdate }}
+                                                                        @endif
+
+                                                                    </td>
+                                                                    <td class="column7">
+                                                                        @if ($order->finisheddate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->finisheddate }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="column8">
+
+                                                                        @if ($order->deliverydate == null)
+                                                                            <button style="--c:#E95A49"><a
+                                                                                    href="">ثبت</a></button>
+                                                                        @else
+                                                                            {{ $order->deliverydate }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="column9"> {{ $all_products }}</td>
+                                                                    <td class="column10">{{ $order->price }}</td>
+
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
 
                                                     </tbody>
@@ -149,7 +206,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        
                                                         @foreach ($customers as $customer)
                                                             @php
                                                                 $temp_orders = App\Models\User::find($customer->id)
@@ -170,6 +227,7 @@
                                                                     $orders_price = $orders_price + $temp_price;
                                                                 }
                                                             @endphp
+                                                        
                                                             <tr>
                                                                 <td class="column1">{{ $customer->name }}</td>
                                                                 <td class="column2">
@@ -178,9 +236,6 @@
                                                                 <td class="column3">{{ $products_count }}</td>
                                                                 <td class="column4">{{ $orders_price }}
                                                                 </td>
-
-
-
                                                             </tr>
                                                         @endforeach
 
@@ -229,7 +284,10 @@
                                                                 <td class="column2">
                                                                     {{ $work_count }}
                                                                 </td>
-                                                                <td class="column3">{{ ($works_price * 2) / 3 }}</td>
+                                                                @php
+                                                                    $rounded_price = round(($works_price * 2) / 3);
+                                                                @endphp
+                                                                <td class="column3">{{ $rounded_price }}</td>
 
                                                             </tr>
                                                         @endforeach
@@ -255,56 +313,65 @@
                                                             <th class="column2"> نام مشتری </th>
                                                             <th class="column3"> نام کالا</th>
                                                             <th class="column4"> نام خیاط</th>
-                                                            <th class="column5"> ثبت </th>
+                                                            <th class="column5"> تغییر خیاط</th>
+                                                            <th class="column6"> ثبت </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($orders as $order)
-                                                            @php
-                                                                $user_id = App\Models\Order::find($order->id)
-                                                                    ->user()
-                                                                    ->first();
-                                                                $user_name = App\Models\User::find($user_id)->first()->name;
-                                                                $products = App\Models\Order::find($order->id)
-                                                                    ->products()
-                                                                    ->get();
-                                                            @endphp
 
-                                                            @foreach ($products as $product)
+                                                        @foreach ($order_product as $temp)
+                                                            <form method="GET"
+                                                                action="{{ route('select_tailor', ['order_product_id' => $temp->id]) }}">
+                                                                @php
+                                                                    $user_id = App\Models\Order::find($temp->order_id)
+                                                                        ->user()
+                                                                        ->first();
+                                                                    $username = App\Models\User::find($user_id)->first()->name;
+                                                                    $productname = App\Models\Product::find($temp->product_id)->name;
+                                                                    $tailorname = App\Models\User::find($temp->user_id)->name;
+                                                                @endphp
                                                                 <tr>
-                                                                    <td class="column1">{{ $order->id }}</td>
+                                                                    <td class="column1">{{ $temp->order_id }}</td>
                                                                     <td class="column2">
-                                                                        {{ $user_name }}
+                                                                        {{ $username }}
                                                                     </td>
-                                                                    <td class="column3">{{ $product->name }}
+                                                                    <td class="column3">{{ $productname }}
+                                                                    </td>
+                                                                    <td class="column4">{{ $tailorname }}
                                                                     </td>
 
-                                                                    <td class="column4">
-                                                                        @php
-                                                                            $tailors = App\Models\User::all()->where('role', 'tailor');
-                                                                        @endphp
-                                                                        <select name="tailors" id="tailors">
-
+                                                                    <td class="column5">
+                                                                        <select name="tailor_id" id="tailor_id">
                                                                             @foreach ($tailors as $tailor)
-                                                                                <option value="volvo">
+                                                                                {{-- <li>
+                                                                                    {{ $tailor->name }} <input
+                                                                                        type="radio"
+                                                                                        aria-label="Radio button for following text input"
+                                                                                        name="selecttailor"
+                                                                                        id="selecttailor"
+                                                                                        value="{{ $tailor->id }} ">
+                                                                                </li> --}}
+                                                                                <option value="{{ $tailor->id }}">
                                                                                     {{ $tailor->name }}
                                                                                 </option>
                                                                             @endforeach
-
                                                                         </select>
+
                                                                     </td>
-                                                                    <td class="column5">
+                                                                    <td class="column6">
                                                                         {{-- @if ($order->finisheddate == null) --}}
-                                                                        <button style="--c:#E95A49"><a
-                                                                                href="{{ route('select_tailor', ['id' => $order]) }}">ثبت</a></button>
+
+                                                                        <button type="submit" style="--c:#E95A49"
+                                                                            name="button">ثبت</button>
+
                                                                         {{-- @else
                                                                             {{ $order->finisheddate }}
                                                                         @endif --}}
 
                                                                     </td>
-
                                                                 </tr>
-                                                            @endforeach
+
+                                                            </form>
                                                         @endforeach
 
                                                     </tbody>
@@ -317,9 +384,9 @@
                         </div>
                         <div class="bhoechie-tab-content">
                             <center>
-                                <form method="GET" action="{{ route('pruductRegister') }}">
-                                    @csrf
 
+                                <form method="GET" action="{{ route('pruductRegister') }}">
+                                    {{-- @csrf --}}
                                     <div>
                                         <x-input-label for="name" :value="__('نام')" />
                                         <x-text-input id="name" class="block mt-1 w-full" type="text"
@@ -327,7 +394,6 @@
                                             style="background-color:yellow; direction:rtl" />
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
-
 
                                     <div class="mt-4">
                                         <x-input-label for="type" :value="__('نوع')" />
@@ -356,9 +422,10 @@
                                     </div>
 
                                     <div class="flex items-center justify-end mt-4">
-                                        <input type="submit" style="--c:#E95A49" value="ثبت">
+                                        <input class="btn_1" type="submit" style="--c:#E95A49" value="ثبت">
                                     </div>
                                 </form>
+
                             </center>
                         </div>
                     </div>
@@ -367,6 +434,11 @@
             </div>
         </div>
         <!-- start javascript -->
+        <script>
+            function canceledAlert() {
+                alert("  سفارش لغو شده است!");
+            }
+        </script>
         <script src="{{ asset('js/jquery_dashboard-3.1.1.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap_dashboard.min.js') }}"></script>
         <script src="{{ asset('js/scripts_dashboard.js') }}"></script>

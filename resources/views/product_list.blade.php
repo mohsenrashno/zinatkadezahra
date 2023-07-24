@@ -5,8 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>زینتکده زهرا</title>
+    <link rel="icon" href="img/favicon.png')}}">
+    <!-- Bootstrap CSS -->
     <link rel="icon" href="{{ asset('img/favicon.png') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap4-rtl.min.css') }}">
@@ -28,7 +29,6 @@
 </head>
 
 <body class="rtl">
-
     <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container">
@@ -98,100 +98,51 @@
         </header>
         <!-- Header part end-->
 
-        <!-- banner part start-->
-        <section class="banner_part">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-5">
-                        <div class="banner_text">
-                            <div class="banner_text_iner">
-                                <h1> دوخت وسایل آشپزخانه
-                                </h1>
-                                <p>تنوع در طرح، رنگ و جنس پارچه </p>
-                                <a href="{{ route('product_list') }}" class="btn_1">همین الان خرید کنید</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="banner_img">
-                <img src="{{ asset('img/banner.png') }}" alt="#" class="img-fluid">
-                <img src="{{ asset('img/banner_pattern.png') }}" alt="#" class="pattern_img img-fluid">
-            </div>
-        </section>
-        <!-- banner part start-->
-
-        <!-- product list start-->
-        <section class="single_product_list">
+        <!-- breadcrumb part start-->
+        <section class="breadcrumb_part">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="single_product_iner">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_img">
-                                        <img src="{{ asset('img/dastkheshfer.png') }}" class="img-fluid" alt="#">
-                                        <img src="{{ asset('img/product_overlay.png') }}" alt="#"
-                                            class="product_overlay img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="single_product_content">
-                                        <h5> قیمت 150000 تومان</h5>
-                                        <h2> <a href="{{ route('single-product', ['id', 4]) }}"></a> دستکش فر گلدوزی شده
-                                        </h2>
-                                        <a href="{{ route('product_list') }}" class="btn_3">امتحان کنید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_product_iner">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_img">
-                                        <img src="{{ asset('img/dastgir.png') }}" class="img-fluid" alt="#">
-                                        <img src="{{ asset('img/product_overlay.png') }}" alt="#"
-                                            class="product_overlay img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="single_product_content">
-                                        <h5> قیمت 110000 تومان</h5>
-                                        <h2> <a href="{{ route('single-product', ['id', 1]) }}">دستگیر تکه دوزی شده</a>
-                                        </h2>
-                                        <a href="{{ route('product_list') }}" class="btn_3">امتحان کنید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_product_iner">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_img">
-                                        <img src="{{ asset('img/hole.png') }}" class="img-fluid"
-                                            alt="#">
-                                        <img src="{{ asset('img/product_overlay.png') }}" alt="#"
-                                            class="product_overlay img-fluid">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="single_product_content">
-                                        <h5> قیمت 220000 تومان</h5>
-                                        <h2> <a href="{{ route('single-product', ['id', 6]) }}"> حوله آشپزخانه</a>
-                                        </h2>
-                                        <a href="{{ route('product_list') }}" class="btn_3">امتحان کنید</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="breadcrumb_iner">
+                            <h2>لیست محصولات</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- product list end-->
+        <!-- breadcrumb part end-->
+
+        <!-- product list part start-->
+        <section class="product_list section_padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="product_list">
+                            <div class="row">
+                                @foreach ($products as $product)
+                                    <div class="col-lg-6 col-sm-6">
+                                        <div class="single_product_item">
+                                            <a href="{{ route('single-product', ['product_id' => $product->id]) }}"><img
+                                                    src="{{ asset('img/product/' . $product->name . '.png') }}"
+                                                    alt="#" class="img-fluid"></a>
+                                            <h3> <a href="{{ route('single-product', ['product_id' => $product->id]) }}">{{ $product->name }}
+                                                    {{ $product->type }}</a>
+                                            </h3>
+                                            <p> قیمت {{ $product->price }} تومان</p>
+                                        </div>
+                                    </div>
+                                @endforeach
 
 
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product list part end-->
 
         <!-- client review part here -->
         <section class="client_review " style="direction: ltr">
@@ -227,7 +178,6 @@
             </div>
         </section>
         <!-- client review part end -->
-
 
         <!-- feature part here -->
         <section class="feature_part section_padding">
@@ -355,6 +305,7 @@
         </footer>
         <!--::footer_part end::-->
 
+        <!-- jquery plugins here-->
         <!-- jquery plugins here-->
         <script src="{{ asset('js/jquery-1.12.1.min.js') }}"></script>
         <!-- popper js -->

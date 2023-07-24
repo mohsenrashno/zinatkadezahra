@@ -21,17 +21,18 @@
     </head>
 
     <body>
+
         <body>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container" style="top:-150px; right:-5px">
                         <!-- start tab list -->
                         <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                             <div class="list-group">
                                 <a href="#" class="list-group-item active text-center">
                                     <h4 class="fa fa-plane"></h4><br />سفارشات
                                 </a>
-                               
+
 
                             </div>
                         </div>
@@ -73,7 +74,7 @@
                                                                 @endphp
                                                                 @if ($order->paidstatus == null)
                                                                     <tr
-                                                                        onclick="window.location='{{ route('cart', ['id' => $order]) }}'">
+                                                                        onclick="window.location='{{ route('cart', ['order' => $order]) }}'">
                                                                         <td class="column1">{{ $order->id }}</td>
                                                                         <td class="column2">{{ $order->orderdate }}</td>
                                                                         <td class="column3">
@@ -131,7 +132,7 @@
 
                                 </center>
                             </div>
-                           
+
                         </div>
                         <!-- end tab content -->
                     </div>

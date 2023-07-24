@@ -89,11 +89,11 @@
 					</div>
 					<div class="right col-lg-6 col-xs-6">
 						@php
-                            $id = auth()->user();
+                            $id = auth()->user()->id;
                      	@endphp
 
                         @if($id != null)
-                                 <a href="{{ route('order', ['id' => $id, 'productname' => $productname]) }}"> <p>افزودن به سبد</p>  </a>
+                                 <a href="{{ route('order', ['productname' => $productname]) }}"> <p>افزودن به سبد</p>  </a>
 				        @endif
 						
 					</div>

@@ -23,7 +23,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 bhoechie-tab-container" style="top:-150px; right:-5px">
                     <!-- start tab list -->
                     <div class="col-lg-3 col-md-3 col-sm-3 col-3 bhoechie-tab-menu">
                         <div class="list-group">
@@ -40,12 +40,6 @@
                     <!-- end tab list -->
                     <!-- start tab content -->
                     <div class="col-lg-9 col-md-9 col-sm-9 col-12 bhoechie-tab">
-                        <!-- flight section -->
-
-                        <!-- train section -->
-
-
-                        <!-- hotel search -->
 
                         <div class="bhoechie-tab-content">
                             <center>
@@ -58,38 +52,46 @@
                                                         <tr class="table100-head">
                                                             <th class="column1">شماره سفارش</th>
                                                             <th class="column2">نام محصول </th>
-                                                            <th class="column3"> شروع آماده سازی</th>
-                                                            <th class="column4"> هزینه</th>
+                                                            <th class="column3"> تاریخ آماده سازی</th>
+                                                            <th class="column4"> تاریخ اتمام</th>
+                                                            <th class="column5"> هزینه</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
-                                                        @foreach ($orders as $order)
+                                                        @foreach ($all_work as $work)
                                                             @php
-                                                                $products = App\Models\Order::find($order->id)
-                                                                    ->products()
-                                                                    ->get();
+                                                                $product = App\Models\Product::find($work->product_id);
+                                                                $order = App\Models\Order::find($work->order_id);
                                                             @endphp
                                                             <tr>
-                                                                @foreach ($products as $product)
-                                                                    <td class="column1">{{ $order->id }}</td>
-                                                                    <td class="column2">
-                                                                        {{ $product->name }}
-                                                                    </td>
-                                                                    <td class="column3">
-                                                                        @if ($order->preparingdate == null)
-                                                                            <button style="--c:#E95A49"><a
-                                                                                    href="{{ route('preparing', ['id' => $order]) }}">ثبت</a></button>
-                                                                        @else
-                                                                            {{ $order->preparingdate }}
-                                                                        @endif
-                                                                    </td>
-                                                                    @php
-                                                                        $rounded_price = round(($order->price * 2) / 3);
-                                                                    @endphp
-                                                                    <td class="column4">{{ $rounded_price }}
-                                                                    </td>
-                                                                @endforeach
+
+                                                                <td class="column1">{{ $work->order_id }}</td>
+                                                                <td class="column2">
+                                                                    {{ $product->name }}
+                                                                </td>
+                                                                <td class="column3">
+                                                                    @if ($order->preparingdate == null)
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('preparing', ['order_id' => $order->id]) }}">ثبت</a></button>
+                                                                    @else
+                                                                        {{ $order->preparingdate }}
+                                                                    @endif
+                                                                </td>
+                                                                <td class="column4">
+                                                                    @if ($order->finisheddate == null)
+                                                                        <button style="--c:#E95A49"><a
+                                                                                href="{{ route('finished', ['order_id' => $order->id]) }}">ثبت</a></button>
+                                                                    @else
+                                                                        {{ $order->finisheddate }}
+                                                                    @endif
+                                                                </td>
+                                                                @php
+                                                                    $rounded_price = round(($product->price * 2) / 3);
+                                                                @endphp
+                                                                <td class="column5">{{ $rounded_price }}
+                                                                </td>
+
                                                             </tr>
                                                         @endforeach
 
@@ -118,17 +120,13 @@
                                                     </thead>
                                                     <tbody>
 
-
                                                         <tr>
-
                                                             <td class="column1">{{ $count_work }}</td>
                                                             <td class="column2">
-                                                                {{ $sum_price }}
+                                                                {{ ($sum_price * 2) / 3 }}
                                                             </td>
 
-
                                                         </tr>
-
 
                                                     </tbody>
                                                 </table>

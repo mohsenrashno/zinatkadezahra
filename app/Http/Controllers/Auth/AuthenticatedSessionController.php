@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+       // return redirect()->intended(RouteServiceProvider::HOME);
 
         $id = auth()->user()->id;
         $role = User::find($id)->role;
@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         if($role == 'tailor')
             return redirect()->intended(RouteServiceProvider::TAILOR);
         if($role == 'customer')
-            return redirect()->intended(RouteServiceProvider::CUSTOMER);
+            return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

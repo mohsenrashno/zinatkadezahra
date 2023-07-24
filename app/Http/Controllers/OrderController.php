@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function register(Request $request)
     {
-        $user_id = $request->id;
+        $user_id = auth()->user()->id;
         $role = User::find($user_id)->role;
         $product_id = Product::where('name', $request->productname)->first()->id;
         $order_id = null;
@@ -29,16 +29,17 @@ class OrderController extends Controller
             $order_id = $temp->id;
         }
 
-
-        $data = array('order_id' => $order_id, 'product_id' => $product_id, 'user_id' => $tailor_id_default, 'count' => 1, 'price' => $price);
-        $t = DB::table('order_product')->insert($data);
+        $x = $request->count;
+        $price_order = $price * $x;
+        for (; $x > 0; $x--) {
+            $data = array('order_id' => $order_id, 'product_id' => $product_id, 'user_id' => $tailor_id_default, 'count' => 1, 'price' => $price);
+            DB::table('order_product')->insert($data);
+        }
 
         //for update sum of price
         $new_price = Order::find($order_id)->price;
-        $new_price = $new_price + $price;
+        $new_price = $new_price + $price_order;
         $r = DB::table('orders')->where('id', $order_id)->update(array('price' => $new_price));
-
-        //  return dd($t);
 
         return view('welcome', ['role' => $role]);
 
