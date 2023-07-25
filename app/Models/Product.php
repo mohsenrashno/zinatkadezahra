@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
+<<<<<<< HEAD
+=======
+use App\Models\Picture;
+>>>>>>> detached-head
 
 class Product extends Model
 {
@@ -16,6 +20,14 @@ class Product extends Model
 		'size',
 		'price'
 	];
+<<<<<<< HEAD
+=======
+
+	public function pictures()
+	{
+		return $this->hasMany(Picture::class);
+	}
+>>>>>>> detached-head
 	
 	public function orders()
 	{

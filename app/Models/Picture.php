@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
+=======
+use App\Models\Product;
+>>>>>>> detached-head
 
 class Picture extends Model
 {
@@ -14,4 +18,12 @@ class Picture extends Model
 		'path'
 	
 	];
+<<<<<<< HEAD
+=======
+
+	public function product()
+	{
+		return $this->belongsTo(Product::class);
+	}
+>>>>>>> detached-head
 }

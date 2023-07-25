@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 			$table->string('name');
+<<<<<<< HEAD
 			$table->string('type');
 			$table->string('size');
+=======
+			$table->string('type')->nullable();
+			$table->string('size')->nullable();
+>>>>>>> detached-head
 			$table->string('price');
             $table->timestamps();
         });

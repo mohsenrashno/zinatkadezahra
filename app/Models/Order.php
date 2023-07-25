@@ -32,7 +32,11 @@ class Order extends Model
 	
 	public function products()
 	{
+<<<<<<< HEAD
 		return $this->belongsToMany(Product::class);
 		
+=======
+		return $this->belongsToMany(Product::class);		
+>>>>>>> detached-head
 	}
 }

@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<<<<<<< HEAD
             {{ __('Profile') }}
+=======
+            {{ __('تنظیمات') }}
+>>>>>>> detached-head
         </h2>
     </x-slot>
 
