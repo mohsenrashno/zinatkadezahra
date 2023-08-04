@@ -133,8 +133,7 @@
 
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="email" name="email"
-                                            :value="old('email')" required autofocus autocomplete="email"
-                                            placeholder="رایانامه">
+                                            pattern="[1-9]{1}[0-9]{9}" placeholder="شماره همراه">
                                     </div>
 
                                     <div class="col-md-12 form-group p_star">

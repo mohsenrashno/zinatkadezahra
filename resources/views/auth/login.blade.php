@@ -135,11 +135,11 @@
                                     @csrf
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="email" name="email"
-                                            :value="old('email')" required autofocus autocomplete="email" 
-                                            placeholder="رایانامه">
+    
+                                            placeholder="شماره همراه">
                                     </div>
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="password" class="form-control" id="password" name="password"
+                                        <input type="password" class="form-control" id= "password" name="password"
                                             required autocomplete="current-password" 
                                             placeholder="رمز عبور">
                                     </div>

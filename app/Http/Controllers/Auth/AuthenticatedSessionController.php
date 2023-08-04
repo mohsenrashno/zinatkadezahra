@@ -18,30 +18,59 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+
         return view('auth.login');
+
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
 
+    public function store(LoginRequest $request)
+    {
+
+
+        $new_email = $request->email . '@f.c';
+        $request->merge(['email' => $new_email]);
+
+        $request->authenticate();
         $request->session()->regenerate();
 
-       // return redirect()->intended(RouteServiceProvider::HOME);
+
+        // return redirect()->intended(RouteServiceProvider::HOME);
 
         $id = auth()->user()->id;
         $role = User::find($id)->role;
 
-        if($role == 'admin')
+        if ($role == 'admin')
             return redirect()->intended(RouteServiceProvider::ADMIN);
-        if($role == 'tailor')
+        if ($role == 'tailor')
             return redirect()->intended(RouteServiceProvider::TAILOR);
-        if($role == 'customer')
+        if ($role == 'customer')
             return redirect()->intended(RouteServiceProvider::HOME);
     }
+
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+
+    //     return dd(13);
+    //     $request->authenticate();
+
+    //     $request->session()->regenerate();
+
+    //     // return redirect()->intended(RouteServiceProvider::HOME);
+
+    //     $id = auth()->user()->id;
+    //     $role = User::find($id)->role;
+
+    //     if ($role == 'admin')
+    //         return redirect()->intended(RouteServiceProvider::ADMIN);
+    //     if ($role == 'tailor')
+    //         return redirect()->intended(RouteServiceProvider::TAILOR);
+    //     if ($role == 'customer')
+    //         return redirect()->intended(RouteServiceProvider::HOME);
+    // }
 
     /**
      * Destroy an authenticated session.
